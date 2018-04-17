@@ -14,12 +14,9 @@ class CreateDetallesTable extends Migration
     public function up()
     {
         Schema::create('detalles', function (Blueprint $table) {
-            $table->foreign('id_factura')
-            ->references('id_factura')->on('facturas')
-            ->onDelete('cascade');
-            $table->foreign('id_producto')
-            ->references('id_producto')->on('productos')
-            ->onDelete('cascade');
+            $table->increments('id');
+            $table->integer('id_producto')->unsigned();
+            $table->integer('id_factura')->unsigned();
         });
     }
 

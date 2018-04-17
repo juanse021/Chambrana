@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/caja', 'FacturasController@mesas')->name('caja');
+
 
 //Administrativas
 Route::resource('inventario', 'Admin\InventarioController');

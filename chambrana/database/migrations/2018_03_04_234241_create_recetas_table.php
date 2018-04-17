@@ -14,14 +14,11 @@ class CreateRecetasTable extends Migration
     public function up()
     {
         Schema::create('recetas', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('id_producto')->unsigned();
             $table->integer('id_ingrediente')->unsigned();
-            $table->foreign('id_producto')
-            ->references('id_producto')->on('productos')
-            ->onDelete('cascade');
-            $table->foreign('id_ingrediente')
-            ->references('id_ingrediente')->on('ingredientes')
-            ->onDelete('cascade');
+            $table->integer('cantidad');
+            $table->timestamps();
         });
     }
 

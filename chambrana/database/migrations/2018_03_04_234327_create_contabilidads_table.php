@@ -13,8 +13,9 @@ class CreateContabilidadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contabilidads', function (Blueprint $table) {
+        Schema::create('contabilidades', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fecha');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateContabilidadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contabilidads');
+        Schema::dropIfExists('contabilidades');
     }
 }

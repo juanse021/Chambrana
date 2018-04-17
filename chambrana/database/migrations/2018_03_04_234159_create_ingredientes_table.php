@@ -14,11 +14,10 @@ class CreateIngredientesTable extends Migration
     public function up()
     {
         Schema::create('ingredientes', function (Blueprint $table) {
-            $table->increments('id_ingrediente');
-            $table->string('Nombre');
-            $table->integer('Cantidad');
-            $table->date('FechaInsercion');
-            $table->date('FechaVencimiento');
+            $table->increments('id');
+            $table->string('nombre');
+            $table->string('tipo');
+            $table->timestamps();
         });
     }
 
