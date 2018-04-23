@@ -17,7 +17,7 @@
 
                         <ol>
                            @foreach( $mesas as $mesa)
-                                <li><a href="#">Mesa {{$mesa->mesa}}</a></li>
+                                <li><a href="{{route('factura', [$mesa->id] )}}">Mesa {{$mesa->mesa}}</a></li>
                                @endforeach
                         </ol>
 
@@ -26,4 +26,5 @@
             </div>
         </div>
     </div>
+
 @endsection

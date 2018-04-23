@@ -14,7 +14,7 @@ class Factura extends Model
     protected $table = 'facturas';
 
     public function mesa(){
-        return $this->belongsTo('App\Models\Diplomado', 'id_mesa');
+        return $this->belongsTo('App\Mesa', 'id_mesa');
 
     }
 

@@ -19,7 +19,7 @@ class CreateFacturasTable extends Migration
             $table->date('fecha');
             $table->integer('esta_pago')->default(0);
             $table->integer('id_mesa')->unsigned();
-            $table->integer('id_contabilidad')->unsigned();
+            //$table->integer('id_contabilidad')->unsigned();
             $table->timestamps();
         });
     }

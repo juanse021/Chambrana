@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/caja', 'FacturasController@mesas')->name('caja');
+Route::get('/caja/mesa/{id}', 'FacturasController@abrirFactura')->name('factura');
 
 
 //Administrativas
