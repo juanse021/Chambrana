@@ -17,7 +17,8 @@
             background-color: #dddddd;
         }
     </style>
-    @endsection
+@endsection
+
 @section('content')
     <div class="hide" id="urlAct">{{ url('/') }}</div>
     <div class="container">
@@ -37,48 +38,19 @@
                             <th>Valor</th>
                         </tr>
                         @foreach($detalles as $detalle)
-                        <tr>
-                            <td>{{$detalle->producto->id}}</td>
-                            <td>{{$detalle->producto->nombre}}</td>
-                            <td>{{$detalle->cantidad}}</td>
-                            <td>{{$detalle->producto->precio}}</td>
+                            <tr>
+                                <td>{{$detalle->producto->id}}</td>
+                                <td>{{$detalle->producto->nombre}}</td>
+                                <td>{{$detalle->cantidad}}</td>
+                                <td>{{$detalle->producto->precio}}</td>
 
-                            <td>{{$detalle->cantidad * $detalle->producto->precio}}</td>
-                        </tr>
+                                <td>{{$detalle->cantidad * $detalle->producto->precio}}</td>
+                            </tr>
                         @endforeach
                     </table>
 
                     <div class="card-body">
 
-
-                            <div class="form-group row">
-                                <label for="producto" class="col-sm-4 col-form-label text-md-right">Producto</label>
-
-                                <div class="col-md-6">
-                                    <select id="producto" class="js-example-basic-single" name="producto" style="width: 90%">
-                                        @foreach($productos as $producto)
-                                            <option value="{{$producto->id}}">{{$producto->nombre}} - ${{$producto->precio}}</option>
-                                            @endforeach
-                                    </select>
-                                </div>
-
-                            </div>
-                            <div class="form-group row">
-                                <label for="cantidad" class="col-sm-4 col-form-label text-md-right">Cantidad</label>
-
-                                <div class="col-md-4">
-                                    <input id="cantidad" type="number" name="cantidad" min="1" max="100">
-                                </div>
-                                <div class="col-md-4">
-                                    <button  class="btn btn-primary agregar">
-                                       Agregar Producto
-                                    </button>
-                                </div>
-                            </div>
-                            <hr>
-
-                        <form method="POST" action="{{ route('pagar', $factura->id) }}">
-                            @csrf
                             <div class="form-group row">
                                 <label disabled for="email" class="col-sm-4 col-form-label text-md-right">Referencia</label>
 
@@ -92,15 +64,8 @@
                                 <label  for="email" class="col-sm-4 col-form-label text-md-right">Mesa</label>
 
                                 <div class="col-md-6">
-                                    <input disabled  id="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $factura->mesa->id}}" required autofocus>
-
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input disabled  id="email" class="form-control" name="email" value="{{ $factura->mesa->id}}" required autofocus>
                                 </div>
-
                             </div>
 
                             <hr>
@@ -113,16 +78,6 @@
 
                                 </div>
                             </div>
-
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Pagar
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -137,9 +92,6 @@
         });
 
         $(".agregar").on('click',function () {
-            if($('#cantidad').val() == 0){
-                return alert('ingresa cantidad');
-            }
             $.ajax({
                 url: $('#urlAct').html() + '/agregar_producto',
                 type: 'post',
@@ -162,4 +114,4 @@
 
     </script>
 
-    @endsection
+@endsection

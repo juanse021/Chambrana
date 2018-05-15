@@ -17,6 +17,8 @@ class CreateDetallesTable extends Migration
             $table->increments('id');
             $table->integer('id_producto')->unsigned();
             $table->integer('id_factura')->unsigned();
+            $table->integer('cantidad')->unsigned();
+            $table->timestamps();
         });
     }
 

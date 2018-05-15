@@ -13,7 +13,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     @yield('styles')
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
 </head>
 <body>
     <div id="app">
@@ -41,7 +48,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -56,6 +63,14 @@
                                     </form>
                                 </div>
                             </li>
+                            @if (Auth::user()->role == 'admin')
+                                <li  ><a class="nav-link" href="{{route('caja')}}">Caja</a></li>
+                                <li ><a class="nav-link" href="{{route('facturas')}}">Facturacion</a></li>
+                                <li ><a class="nav-link" href="#">Inventario</a></li>
+                                <li ><a class="nav-link" href="#">Contabilidad</a></li>
+                            @else
+                                <li ><a class="nav-link" href="#">Caja</a></li>
+                            @endif
                         @endguest
                     </ul>
                 </div>
@@ -68,8 +83,10 @@
     </div>
 
     <!-- Scripts -->
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
+
 @yield('js')
 
 </body>

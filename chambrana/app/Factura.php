@@ -22,6 +22,10 @@ class Factura extends Model
         return $this->hasMany('App\Producto', 'id_factura');
     }
 
+    public function detalle(){
+        return $this->hasMany('App\Detalle', 'id_factura');
+    }
+
     public function contabilidad(){
         return $this->belongsTo('App\Contabilidad', 'id_contabilidad');
 

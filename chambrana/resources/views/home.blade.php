@@ -18,7 +18,7 @@
                     <ol>
                     @if (Auth::user()->role == 'admin')
                         <li><a href="{{route('caja')}}">Caja</a></li>
-                        <li><a href="#">Facturacion</a></li>
+                        <li><a href="{{route('facturas')}}">Facturacion</a></li>
                         <li><a href="#">Inventario</a></li>
                         <li><a href="#">Contabilidad</a></li>
                     @else
