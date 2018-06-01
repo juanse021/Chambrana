@@ -6,6 +6,8 @@ use App\Detalle;
 use App\Factura;
 use App\Mesa;
 use App\Producto;
+use App\Receta;
+use App\Unidad;
 use Illuminate\Http\Request;
 
 class FacturasController extends Controller
@@ -81,6 +83,20 @@ class FacturasController extends Controller
             $factura = Factura::findOrFail($input['id_factura']);
             $producto = Producto::findOrFail($input['producto']);
             $cantidad = (int) $input['cantidad'];
+            $ingredientes = $producto->ingredientes;
+            $i = 0;
+            foreach ($ingredientes as $ingrediente){
+
+                $receta = Receta::where([
+                    ['id_producto', $producto->id],
+                    ['id_ingrediente', $ingrediente->id]
+                ])->get()->first();
+                if($ingrediente->cantidad() - $receta->cantidad <= 0){
+                    $rtAjax['ok'] = false;
+                    $rtAjax['error'] =  'no hay suficiente inventario de ' . $ingrediente->nombre;
+                    return $rtAjax;
+                }
+            }
             $detalle = Detalle::create([
                 'id_factura' => $factura->id,
                 'id_producto' => $producto->id,
@@ -100,6 +116,26 @@ class FacturasController extends Controller
 
     public function pagar($id, Request $request){
         $factura = Factura::findOrFail($id);
+        $productos = $factura->detalle;
+        foreach ($productos as $producto){
+            $ingredientes = $producto->producto->ingredientes;
+            foreach ($ingredientes as $ingrediente){
+                $unidades = $ingrediente->unidades;
+                $receta = Receta::where([
+                    ['id_producto', $producto->producto->id],
+                    ['id_ingrediente', $ingrediente->id]
+                ])->get()->first();
+                if(count($unidades) > 0){
+                    $unidades[0]->cantidad -= (int) $receta->cantidad;
+                    $unidades[0]->save();
+                    if($unidades[0]->cantidad <= 0){
+                        $unidad_eliminar = Unidad::find($unidades[0]->id);
+                        $unidad_eliminar->delete();
+                    }
+                }
+
+            }
+        }
         $factura->esta_pago = 1;
         $factura->save();
         return redirect()->route('caja');

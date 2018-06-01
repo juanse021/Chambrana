@@ -22,5 +22,6 @@ Route::post('/caja/mesa/{id}', 'FacturasController@pagar')->name('pagar');
 Route::get('/facturas', 'FacturasController@index')->name('facturas');
 Route::get('/facturas/{id}', 'FacturasController@show')->name('ver_factura');
 
+
 //Administrativas
 Route::resource('inventario', 'Admin\InventarioController');

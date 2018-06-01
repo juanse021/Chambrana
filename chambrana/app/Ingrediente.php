@@ -17,4 +17,13 @@ class Ingrediente extends Model
         return $this->hasMany('App\Unidad', 'id_ingrediente')->orderBy('cantidad');
     }
 
+    public function cantidad(){
+        $unidades = $this->unidades;
+        $sum = 0;
+        foreach ($unidades as $unidad){
+            $sum += $unidad->cantidad;
+        }
+        return $sum;
+    }
+
 }

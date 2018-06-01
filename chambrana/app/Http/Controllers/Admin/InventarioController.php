@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Factura;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Ingrediente;
@@ -18,7 +19,10 @@ class InventarioController extends Controller
     public function index()
     {
 
-        return view('admin.inventario.index');
+        $ingredientes = Ingrediente::all();
+        return view('admin.inventario.index')->with([
+            'ingredientes' => $ingredientes
+        ]);
         
     }
 

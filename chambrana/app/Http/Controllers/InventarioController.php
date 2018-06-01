@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ingrediente;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -14,6 +15,8 @@ class InventarioController extends Controller
     public function index()
     {
         //
+        $ingredientes = Ingrediente::all();
+        return $ingredientes;
     }
 
     /**
